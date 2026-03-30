@@ -4,20 +4,22 @@ import(
 	"fmt"
 	"flag"
 	"log"
-	"productStorage/internal/models"
-	"productStorage/internal/parser"
-	"productStorage/internal/storage"
+	"go_storage/internal/models"
+	"go_storage/internal/parser"
+	"go_storage/internal/storage"
 )
 
 func main(){
-	rep := storage.NewRepository[*models.Product]()
+	// rep := storage.NewRepository[*models.Product]()
 
-	fileNamePTR := flag.String("file", "data.txt", "")
+		fileNamePTR := flag.String("file", "data.txt", "Передайте адрес data файла")
 
 	flag.Parse()
 	// используется для того чтобы компилятор прочитал переданный флаг
 
 	currentFile := *fileNamePTR
+
+	var repos storage.productStorage = storage.
 
 	fmt.Printf("Система настроена на чтение из файла: %s", currentFile)
 	fmt.Printf("Чтение из файла (%s)", path)

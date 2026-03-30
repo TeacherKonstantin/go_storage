@@ -5,7 +5,7 @@ import(
 	"fmt"
 	"os"
 	"strings"
-	"productStorage/internal/models"
+	"go_storage/internal/models"
 )
 
 func ParseProductsFromFile(path string)([]*models.Product,error){
@@ -17,18 +17,18 @@ func ParseProductsFromFile(path string)([]*models.Product,error){
 	defer file.Close()
 
 	var Products []*models.Product
-	lineNum := 1
-	scanner := bufio.NewScanner(file)
+	lineNum := 1//нумерация строк
+	scanner := bufio.NewScanner(file)// сканер для построчного считывания
 
 	for scanner.Scan(){
 		line := scanner.Text()
 
-		if strings.TrimSpace(line) == ""{
+		if strings.TrimSpace(line) == ""{// проверка на пустоту
 			lineNum++
 			continue
 		}
 
-		parts := strings.Split(line, ";")
+		parts := strings.Split(line, ";")// разбиение на составляющие
 
 		if len(parts) != 3{
 			fmt.Printf("[Строка: %d] Недостаточно данных для сохранения продукта", lineNum)
@@ -43,7 +43,7 @@ func ParseProductsFromFile(path string)([]*models.Product,error){
 		product, err := models.NewProduct(name, sbin, date)
 
 		if err != nil{
-			fmt.Printf("Товар %s на строке %d отклонён. Error: %w\n", name, lineNum, err)
+			fmt.Printf("Товар %s на строке %d отклонён. Error: %v\n", name, lineNum, err)
 		} else{
 			Products = append(Products, product)
 		}
