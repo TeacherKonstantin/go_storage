@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"productStorage/internal/models"
+	"go_storage/internal/models"
 )
 
 type ProductStorage interface{
@@ -23,4 +23,6 @@ func (storage *Storage) Add (product *models.Product) {
 	storage.products = append(storage.products, product)
 }
 
-func (storage *Storage) GetAll() []*models.Product
+func (storage *Storage) GetAll() []*models.Product {
+	return storage.products
+}
